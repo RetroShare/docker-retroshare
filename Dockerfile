@@ -1,23 +1,13 @@
-FROM csanders/base
+FROM csanders/winswitch
 MAINTAINER Chris Sanders 
 
 # Install Retroshare
-RUN echo "deb http://archive.ubuntu.com/ubuntu precise universe" >> /etc/apt/sources.list.d/precise.list
+# Skipping universe because winswitch install already added it
+# RUN echo "deb http://archive.ubuntu.com/ubuntu precise universe" >> /etc/apt/sources.list.d/precise.list
 RUN apt-get install -y python-software-properties
 RUN add-apt-repository ppa:csoler-users/retroshare 
 RUN apt-get update
 RUN apt-get install -y retroshare libicu48
-
-# Install winswitch for remote xpra support
-RUN apt-get install -y curl screen
-RUN curl http://winswitch.org/gpg.asc | apt-key add -
-RUN echo "deb http://winswitch.org/ precise main" > /etc/apt/sources.list.d/winswitch.list
-RUN apt-get update
-RUN apt-get install -y winswitch
-
-# Install sshd
-RUN apt-get install -y openssh-server
-RUN mkdir /var/run/sshd
 
 # Create a user for retroshare
 RUN useradd -s /bin/bash -p "tmp" retrouser
