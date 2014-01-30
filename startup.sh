@@ -1,12 +1,15 @@
 #!/bin/bash
 
-# Start sshd
-`which sshd` -D &
-sleep 3
-# start xpra
-#xpra start :100
+# start retroshare
+su - retrouser -c "~/start_retroshare.sh"
 
-# start RetroShare
-ssh retrouser@localhost -i /home/retrouser/.ssh/id_rsa -o StrictHostKeyChecking=no './start_retroshare.sh'
+# Start SSHD and bg it if another command was given
+if [ $1 != "/bin/sh"  ]; then
+    echo "Running sshd in background and executing given CMD: $1"
+    `which sshd` -D &
+    $1
+else
+    echo "Running SSHD in foreground"
+    `which sshd` -D
+fi
 
-$1
