@@ -23,16 +23,9 @@ RUN mkdir /var/run/sshd
 RUN useradd -s /bin/bash -p "tmp" retrouser
 RUN echo retrouser:retropass | chpasswd
 RUN mkdir /home/retrouser
-# RUN mkdir /home/retrouser/.ssh
-# Generate ssh key
-# RUN ssh-keygen -t rsa -f /home/retrouser/.ssh/id_rsa -P ""
-# RUN cat /home/retrouser/.ssh/id_rsa.pub > /home/retrouser/.ssh/authorized_keys
-# Correct permissions
 RUN chown -R retrouser:retrouser /home/retrouser
 RUN chmod -R ug+rwX /home/retrouser
 RUN chmod -R o-rwx /home/retrouser
-# RUN chmod g-rwx /home/retrouser/.ssh/authorized_keys
-# RUN chmod g-rwx /home/retrouser/.ssh/id_rsa
 
 # Add bootstrap scripts
 ADD start_retroshare.sh /home/retrouser/start_retroshare.sh
