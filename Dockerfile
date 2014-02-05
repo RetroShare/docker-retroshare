@@ -8,7 +8,7 @@ MAINTAINER Chris Sanders
 RUN apt-get install -y python-software-properties
 RUN add-apt-repository ppa:csoler-users/retroshare 
 RUN apt-get update
-RUN apt-get install -y retroshare libicu48
+RUN apt-get install -y retroshare libicu48 expect
 
 ## Create a home directory for retroshare user
 RUN mkdir /home/retrouser
