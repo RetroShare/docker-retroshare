@@ -13,6 +13,7 @@ if [ $? -ne 0 ]; then
     chmod -R ug+rwX /home/retrouser
     chmod -R o-rwx /home/retrouser
     chmod ug+x /home/retrouser/*.sh
+    su - retrouser -c "ssh-keygen -t rsa -f rs_ssh_host_rsa_key"
 fi
 
 
